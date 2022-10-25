@@ -63,35 +63,6 @@ class AdminController extends Controller
         ]);
 
         return redirect('/calons');
-
-        //     $this->validate($request, [
-        //     'nama_ketua' => 'required',
-        //     'nama_wakil' => 'required',
-        //     'foto_calon' => 'required | image | mimes:png,jpg,jpeg | max:2045', 
-        //     'visi' => 'required',
-        //     'misi' => 'required',
-        // ]);
-
-        // $new_photo = '';
-
-        
-        // if($request->file('foto_calon')){
-        // $extension = $request->file('foto_calon')->getClientOriginalExtension();
-        // $new_photo = $request->nama_ketua.'-'.now()->timestamp.'.'.$extension;
-        // $request->file('foto_calon')->storeAs('photo', $new_photo);
-        // }
-        // $calon['image'] = $new_photo;
-        // $calon =  Calons::create([
-        //     // 'id' => $calon->count() + 1,
-        //     'nama_ketua' => $request->nama_ketua,
-        //     'nama_wakil' => $request->nama_wakil,
-        //     'foto_calon' => $new_photo,
-        //     'visi' => $request->visi,
-        //     'misi' => $request->misi,
-        // ]);
-
-        // return redirect('/calons');
-        
     }
 
     public function editCalon($id)
@@ -102,10 +73,6 @@ class AdminController extends Controller
 
     public function updateCalon(Request $request, $id)
     {
-        // $calon = calons::find($id);
-        // $calon->update($request->except(['_token']));
-        // return redirect('/calons');
-
         $calon = Calons::findOrFail($id);
 
         
@@ -123,7 +90,7 @@ class AdminController extends Controller
             ]);
             
             $image = $request->file('foto_calon');
-            $nama_foto = $calon->count() + 1 . '.png';
+            $nama_foto = $calon->nama_ketua . "." . $image->getClientOriginalExtension();
             $tujuan_upload = 'foto_calon';
             $image->move($tujuan_upload, $nama_foto);
             $post->foto_calon = $nama_foto;
@@ -137,11 +104,10 @@ class AdminController extends Controller
         return redirect('/calons');
     }
 
-    public function deleteCalon($id)
+    public function deleteCalon($id, $id_calon)
     {
         $table = Calons::where('id', $id)->delete();
-        Calons::where('id', $id_calon)->decrement('suara');
-
+        
         $image_path = 'foto_calon/' . $id . '.jpg';
         if (File::exists($image_path)) {
             File::delete($image_path);

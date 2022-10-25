@@ -2,10 +2,9 @@
 @section('content')
  <div class="dash-content">
     <div class="overview">
-        <div class="title">
-            <span class="text">Dashboard admin</span>
-        </div>
-
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="switchOne" checked="" wire:model="isActive">
+         </div>
         <div class="boxes">
             @foreach ($kandidat as $k)
             <div class="box box1">

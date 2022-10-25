@@ -6,11 +6,10 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VotingController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\jadwal;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('/timer', jadwal::class);
 
 Route::get('login', 'App\Http\Controllers\AuthController@index')->name('login');
 

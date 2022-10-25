@@ -6,6 +6,7 @@
         <span class="text">Recent Activity</span>
     </div>
 
+
     <div class="activity-data">
             <div class="button">
               <div class="content">
