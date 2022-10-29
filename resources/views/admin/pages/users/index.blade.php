@@ -53,7 +53,7 @@
                       @endif
                       <a href="{{ route('user.delete', $user->id) }}"
                         onclick="return confirm('yakin ingin menghapus data?');"
-                          class="sampah"><i class="uil uil-trash-alt"></i></a>
+                        class="sampah"><i class="uil uil-trash-alt"></i></a>
                         </td>
                   </tr>
                   @endforeach

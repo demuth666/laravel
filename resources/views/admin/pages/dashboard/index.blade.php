@@ -3,7 +3,14 @@
  <div class="dash-content">
     <div class="overview">
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="switchOne" checked="" wire:model="isActive">
+            {{-- @foreach ($user as $user) --}}
+            @if ($user->status == 'mulai')
+            <a href="{{ route('off', [$user->status]) }}" class="btn btn-primary"><i class="uil uil-toggle-on"></i></a>
+            @else
+            <a href="{{ route('on', [$user->status]) }}"
+                class="btn btn-danger"><i class="uil uil-toggle-off"></i></a>
+            @endif
+            {{-- @endforeach --}}
          </div>
         <div class="boxes">
             @foreach ($kandidat as $k)
@@ -21,3 +28,4 @@
   </div>
   
 @endsection
+

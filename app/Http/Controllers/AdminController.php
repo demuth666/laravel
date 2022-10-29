@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Admin;
 use App\Models\Calons;
 use App\Models\User;
+use App\Models\users;
 use App\Models\Voting;
 use Illuminate\Http\Request;
 use File;
@@ -14,10 +15,13 @@ class AdminController extends Controller
 {
     public function index()
     {
+        $role = 'admin';
+        $user = users::where('role', $role)->first();
         $kandidat = Calons::all();
         $admin = admin::all();
-        return view('admin.pages.dashboard.index', [
+        return view('admin.pages.dashboard.index',[
             'kandidat' => $kandidat,
+            'user' => $user
         ]);
     }
 
@@ -127,5 +131,19 @@ class AdminController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Pemilih Berhasil Direset');
+    }
+
+    public function on()
+    {
+        DB::table('users')
+        ->update(['status'=> 'mulai']);
+        return redirect('/admin');
+    }
+
+    public function off()
+    {
+        DB::table('users')
+        ->update(['status'=> 'belum']);
+        return redirect('/admin');
     }
 }

@@ -9,8 +9,13 @@ class UserController extends Controller
 {
     public function index()
     {
+        $role ='admin';
+        $users = users::where('role',$role)->first(); 
         $user = users::all();
-        return view('admin/pages/users/index', compact('user'));
+        return view('admin/pages/users/index',[
+            'user' => $user,
+            'users' => $users
+        ]);
     }
 
     public function create()

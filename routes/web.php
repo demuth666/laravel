@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VotingController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\jadwal;
+use App\Http\Controllers\OnOffcontroller;
 
 
 Route::resource('/timer', jadwal::class);
@@ -20,6 +21,8 @@ Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['cek_login:admin']], function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
+        Route::get('/admin/on', [AdminController::class, 'on'])->name('on');
+        Route::get('/admin/off', [AdminController::class, 'off'])->name('off');
         //calon
         Route::get('/calons', [AdminController::class, 'calon'])->name('calon');
         Route::get('/calons/add', [AdminController::class, 'addCalon'])->name('calon.add');

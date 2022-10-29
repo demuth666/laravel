@@ -57,12 +57,12 @@
                       </div>
                   </div>
               </div>
-              @if (auth()->user()->status == 'belum')   
+              @if (auth()->user()->status == 'mulai')   
               <a href="/siswa/vote/{{ $k->id }}" class="d-grid gap-2 p-3">
                   <button class="btn btn-primary" onclick="return confirm('yakin ingin memvote kandidat ini?');">Vote</button>
               </a>
               @else 
-              <p class="d-grid gap-2 p-3">vote masih belum di mulai</p>
+              <p class="text-center">vote masih belum di mulai</p>
               @endif
           </div>
       </div>
